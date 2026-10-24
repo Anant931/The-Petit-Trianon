@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ananya’s Glow-Up</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#fdf5ee;--card:#fffbf7;--ink:#5b4a55;--mute:#9a8a93;--c0:#f9d3dd;--c1:#e3dbf5;--c2:#fcebb8;--c3:#cfeadc;--c4:#d3e5f4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);background:var(--bg);background-image:linear-gradient(180deg,#fdeef0,#fdf5ee 40%,#edf6f0);background-attachment:fixed;min-height:100vh}
+main{max-width:560px;margin:0 auto;padding:14px 14px 40px}
+h1{font:700 27px Fraunces,Georgia,serif;margin:6px 0 2px}
+h2{font:600 17px Fraunces,Georgia,serif;margin:0 0 10px}
+.sub{color:var(--mute);font-size:14px;margin:0 0 12px}
+.stats{display:flex;gap:8px;margin-bottom:12px}
+.chip{flex:1;background:var(--card);border-radius:16px;padding:10px 6px;text-align:center;box-shadow:0 2px 10px #e8d5cc55}
+.chip b{display:block;font:700 21px Fraunces,Georgia,serif}.chip small{color:var(--mute);font-size:12px}
+.tabs{display:flex;background:#f6e9e2;border-radius:16px;padding:4px;margin-bottom:14px}
+.tabs button{flex:1;border:0;background:none;padding:9px;border-radius:12px;font:700 14px Nunito,sans-serif;color:var(--mute);cursor:pointer}
+.tabs .a{background:var(--card);color:var(--ink);box-shadow:0 2px 8px #e8d5cc88}
+.card{background:var(--card);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:0 3px 14px #e8d5cc55}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.nav button,.seg button{border:0;background:var(--card);border-radius:12px;padding:8px 14px;font:700 15px Nunito,sans-serif;color:var(--ink);cursor:pointer;box-shadow:0 2px 8px #e8d5cc66}
+.nav b{font:600 18px Fraunces,Georgia,serif;text-align:center}
+.seg{display:flex;gap:6px;margin-bottom:12px}.seg button{flex:1}.seg .a{background:#f9d3dd}
+.ring{position:relative;width:150px;height:150px;margin:0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring div{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font:700 34px Fraunces,Georgia,serif}
+.ring small{font:600 12px Nunito,sans-serif;color:var(--mute)}
+.msg{text-align:center;margin:12px 0 0;font-weight:600}
+.hb{display:flex;align-items:center;gap:12px;width:100%;border:2px solid transparent;border-radius:18px;padding:12px 14px;margin-bottom:10px;background:var(--c);font:inherit;color:inherit;text-align:left;cursor:pointer;transition:transform .15s,border-color .2s}
+.hb:active{transform:scale(.97)}.hb.on{border-color:var(--d)}
+.hb .em{font-size:28px}.hb b{display:block;font-size:16px}.hb small{color:#7d6b75}.hb>span:nth-child(2){flex:1}
+.ck{width:30px;height:30px;border-radius:50%;background:#fffbf7aa;display:grid;place-items:center;font-weight:800}
+.hb.on .ck{background:var(--d);animation:pop .35s}
+@keyframes pop{50%{transform:scale(1.35)}}
+.bar{height:10px;background:#f0e6df;border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#f6b9c8,#f3d06b);border-radius:9px;transition:width .5s}
+.cp{margin-bottom:12px}.cp .row{display:flex;justify-content:space-between;margin-bottom:5px}.cp small{color:var(--mute)}
+.cp.won .bar i{background:linear-gradient(90deg,#8ccfae,#bfe5cf)}
+.big{width:100%;border:0;border-radius:14px;padding:12px;margin-top:10px;background:#e3dbf5;font:700 15px Nunito,sans-serif;color:var(--ink);cursor:pointer}
+.pie{width:150px;height:150px;border-radius:50%;margin:0 auto 14px;display:grid;place-content:center}
+.pie span{background:var(--card);width:86px;height:86px;border-radius:50%;display:grid;place-content:center;font:700 22px Fraunces,Georgia,serif}
+.lg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px;justify-content:center}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.bars{display:flex;align-items:flex-end;gap:8px;height:150px}
+.bars div{flex:1;text-align:center;font-size:12px;display:flex;flex-direction:column;justify-content:flex-end}
+.bars i{display:block;flex:none;border-radius:8px 8px 4px 4px;margin:2px 0}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:12px 0}
+.cal button{aspect-ratio:1;border:0;border-radius:10px;font:600 12px Nunito,sans-serif;color:var(--ink);cursor:pointer}
+.cal small{text-align:center;color:var(--mute)}
+.aw{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.at{border-radius:18px;padding:14px 10px;text-align:center;background:var(--c,#f6e9e2)}
+.at.lk{opacity:.45;filter:grayscale(.6)}.at span{font-size:30px;display:block}.at b{display:block;font-size:14px}.at small{color:#7d6b75}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.qm{flex:none;border:0;width:38px;height:38px;border-radius:50%;background:var(--card);box-shadow:0 2px 8px #e8d5cc66;font:800 18px Nunito,sans-serif;color:var(--ink);cursor:pointer}
+.hp{margin-bottom:12px}.hp b{display:block;margin-bottom:2px}.hp p{margin:0;line-height:1.5}
+.dz{border:2px dashed #f0a0a0;border-radius:16px;padding:12px}.dz input,.cd input{width:100%;padding:10px;border-radius:12px;border:1px solid #eadfd8;font:600 15px Nunito,sans-serif;margin:8px 0;background:#fff;color:var(--ink)}.dz button:disabled{opacity:.4;cursor:not-allowed}
+.cal button.cl{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2}.cal button.cl small{font-size:10px;color:var(--ink)}.cal button:disabled{opacity:.35;cursor:default}
+#t{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:#f9d3dd;color:var(--ink);padding:11px 20px;border-radius:20px;font-weight:800;box-shadow:0 4px 18px #c9a3b855;transition:transform .3s;z-index:10;text-align:center;max-width:90vw}
+#t.s{transform:translate(-50%,0)}
+.cf{position:fixed;top:-30px;pointer-events:none;z-index:9;animation:fall 2s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2}}
+@media(prefers-reduced-motion:reduce){.cf{display:none}.hb,.bar i{transition:none}}
+</style></head><body>
+<main id="app"></main><div id="t"></div>
+<script>
+const H=[['Necessary Good','Bath','🛁'],['Smooth Operator','Skin care','🧴'],['Chugging Champion','Pineapple juice','🍍'],['Heavy Driver','Workout','🏋️'],['Dietary Devi','Healthy diet','🥗']];
+const CB=[['Holy Trinity for Skin','✨',[0,1,2]],['Dabbang Duo','💪',[3,4]],['Prime Panchang','👑',[0,1,2,3,4]]];
+const AW=[...H.map(h=>[h[2],h[0]]),...CB.map(c=>[c[1],c[0]])];
+const DEEP=['#f0a6b8','#bfaee6','#f3d06b','#8ccfae','#9cc4e6'];
+const COL={ok:'#bfe5cf',mid:'#fbe6b8',red:'#f2a7a7',cheat:'#e3dbf5',now:'#f0e2da',none:'#f3ece6'};
+const K='ananya-glow-v1',A=document.getElementById('app'),$=id=>document.getElementById(id);
+// Paste your Firebase Realtime Database URL between the quotes. Leave empty to save only on this device.
+const DB='https://the-petit-trianon-default-rtdb.asia-southeast1.firebasedatabase.app/';
+const DLG={0:'A fresh page, Anshu. Let’s glow!',20:'One down. I knew you had it in you.',40:'Two done. Keep it rolling, Anshu.',60:'Past halfway, Anshu. Don’t you dare stop now.',80:'C’mon Anshu, you are so close.',100:'Prime Panchang day! I’m so proud of you, Anshu ✨'};
+let S=null,CODE='',online=false;
+try{S=JSON.parse(localStorage.getItem(K));CODE=localStorage.getItem('ag-code')||''}catch(e){}
+S=S||{d:{},c:{},s:null};
+const url=p=>DB.replace(/\/$/,'')+'/tracks/'+encodeURIComponent(CODE)+(p?'/'+p:'')+'.json';
+function push(p,v){if(!DB||!CODE)return;fetch(url(p),{method:'PUT',body:JSON.stringify(v)}).then(r=>{online=r.ok;dot()}).catch(()=>{online=false;dot()})}
+function dot(){const e=$('sy');if(e)e.textContent=!DB?'Saved on this device.':online?'🟢 Synced':'⚪ Offline, will sync later'}
+async function pull(){if(!DB||!CODE)return;try{const r=(await(await fetch(url(''))).json())||{};
+ if((r.r||0)>(S.r||0))S={d:{},c:{},s:r.s||key(today()),r:r.r};
+ for(const k in S.d)if(!(r.d&&k in r.d))push('d/'+k,S.d[k]);
+ S.d={...S.d,...(r.d||{})};S.c={...S.c,...(r.c||{})};
+ if(r.s&&r.s<S.s)S.s=r.s;else if(!r.s||S.s<r.s)push('s',S.s);
+ online=true;save();if(tab!=4)render();dot()}catch(e){online=false;dot()}}
+function setCode(){const v=$('cc').value.trim();if(v.length<6){toast('Use at least 6 characters');return}CODE=v;try{localStorage.setItem('ag-code',v)}catch(e){}render();pull()}
+function chCode(){try{localStorage.removeItem('ag-code')}catch(e){}CODE='';render()}
+function doReset(){if(!confirm('This deletes ALL progress on every device. Really reset?'))return;const r=Date.now();S={d:{},c:{},s:key(today()),r};save();if(DB&&CODE)fetch(url(''),{method:'DELETE'}).then(()=>{push('s',S.s);push('r',r)}).catch(()=>{});sel=today();tab=0;render();toast('Fresh start. Go get ’em 🌸')}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const pad=n=>String(n).padStart(2,'0');
+const key=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const parse=k=>{const[a,b,c]=k.split('-');return new Date(+a,b-1,+c)};
+const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const today=()=>{const t=new Date();t.setHours(0,0,0,0);return t};
+if(!S.s){S.s=key(today());save()}
+let tab=0,R='w',sel=today(),cm=new Date(sel.getFullYear(),sel.getMonth(),1);
+const got=k=>S.d[k]||[0,0,0,0,0];
+const cnt=k=>got(k).filter(Boolean).length;
+const aw=k=>{const g=got(k);return[...g.map(Boolean),...CB.map(c=>c[2].every(i=>g[i]))]};
+const mon=d=>add(d,-((d.getDay()+6)%7));
+const wk=d=>[...Array(7)].map((_,i)=>add(mon(d),i));
+const duo=d=>wk(d).slice(0,6).filter(x=>{const g=got(key(x));return g[3]&&g[4]}).length;
+const ch=k=>!!S.c[k]&&duo(parse(k))>=3;
+const st=k=>{const d=parse(k),n=cnt(k);if(d<parse(S.s)||d>today())return'none';if(ch(k))return'cheat';if(n==5)return'ok';if(k==key(today()))return'now';return n>=3?'mid':'red'};
+const ov=to=>{let n=0,t=0;for(let d=parse(S.s);d<=to;d=add(d,1)){const k=key(d);if(ch(k))continue;n+=cnt(k);t+=5}return t?Math.round(n/t*100):100};
+const stk=()=>{let b=0,c=0,t=key(today());for(let d=parse(S.s);d<=today();d=add(d,1)){const k=key(d);if(ch(k))continue;if(cnt(k)==5){c++;b=Math.max(b,c)}else if(k!=t)c=0}return[c,b]};
+const fmt=(d,l)=>d.toLocaleDateString('en-IN',{weekday:l?'long':'short',day:'numeric',month:'short'});
+const MN=d=>d.toLocaleDateString('en-IN',{month:'short'});
+let tt;function toast(m){if(!m)return;const e=$('t');e.textContent=m;e.className='s';clearTimeout(tt);tt=setTimeout(()=>e.className='',2600)}
+function conf(big){for(let i=0;i<(big?34:10);i++){const s=document.createElement('span');s.className='cf';s.textContent=['🌸','✨','🍍','💖','⭐'][i%5];s.style.cssText=`left:${Math.random()*100}vw;animation-delay:${Math.random()*.5}s;font-size:${14+Math.random()*14}px`;document.body.appendChild(s);setTimeout(()=>s.remove(),2700)}}
+function tg(i){const k=key(sel),g=[...got(k)],b=aw(k),d0=duo(sel);g[i]=g[i]?0:1;S.d[k]=g;if(k<S.s){S.s=k;push('s',k)}push('d/'+k,g);save();const a=aw(k);let m='',big=0;
+ CB.forEach((c,j)=>{if(a[5+j]&&!b[5+j]){m=`🏆 ${c[0]} unlocked!`;big=1}else if(!a[5+j]&&b[5+j])m=`${c[0]} slipped away…`});
+ if(!m&&g[i])m=g.filter(Boolean).length==4?DLG[80]:`🏅 ${H[i][0]} badge earned!`;
+ if(duo(sel)>=3&&d0<3){m='🍰 Sunday cheat day unlocked!';big=1}
+ if(g[i])conf(big);toast(m);render()}
+function cheat(){const k=key(sel);if(duo(sel)<3)return;S.c[k]=S.c[k]?0:1;if(S.c[k]){conf(1);toast('Enjoy your cheat day 🍰')}push('c/'+k,S.c[k]);save();render()}
+function go(n){let d;if(tab==1&&R=='w')d=add(sel,7*n);else if(tab==1&&R=='m')d=new Date(sel.getFullYear(),sel.getMonth()+n,1);else d=add(sel,n);
+ if(d>today())d=today();const last=tab==1&&R=='w'?add(mon(d),6):tab==1&&R=='m'?new Date(d.getFullYear(),d.getMonth()+1,0):d;
+ sel=d;render()}
+function rng(){if(R=='d')return[sel];if(R=='w')return wk(sel);const a=[];for(let d=new Date(sel.getFullYear(),sel.getMonth(),1);d.getMonth()==sel.getMonth();d=add(d,1))a.push(d);return a}
+function vT(){const k=key(sel),g=got(k),n=cnt(k),p=n*20,isT=k==key(today()),C=2*Math.PI*52,c=p==100?'#8ccfae':p>=60?'#f3d06b':'#f0a0a0',red=st(k)=='red';
+ const m=p==0&&!isT?'Nothing logged for this day':DLG[p];
+ const d3=Math.min(duo(sel),3),un=duo(sel)>=3;
+ return `<div class="nav"><button onclick="go(-1)">‹</button><b>${fmt(sel,1)}${isT?' · Today':''}</b><button onclick="go(1)">›</button></div>
+<div class="card"${red?' style="background:#fbe3e3"':''}><div class="ring"><svg width="150" height="150"><circle cx="75" cy="75" r="52" fill="none" stroke="#f0e6df" stroke-width="14"/><circle cx="75" cy="75" r="52" fill="none" stroke="${c}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${p/100*C} ${C}" style="transition:stroke-dasharray .6s"/></svg><div>${p}%<small>${n} of 5 done</small></div></div>
+<p class="msg">${ch(k)?'Cheat day! No penalty today 🍰':red?'A red day, Anshu. It happens. I’ll be waiting for the comeback 💔':m}</p></div>
+${H.map((h,i)=>`<button class="hb ${g[i]?'on':''}" style="--c:var(--c${i});--d:${DEEP[i]}" onclick="tg(${i})"><span class="em">${h[2]}</span><span><b>${h[0]}</b><small>${h[1]}${g[i]?' · 🏅 badge earned':''}</small></span><span class="ck">${g[i]?'✓':''}</span></button>`).join('')}
+<div class="card"><h2>How close are you today?</h2>${CB.map(([nm,e,ix])=>{const d=ix.filter(i=>g[i]).length,l=ix.filter(i=>!g[i]).map(i=>H[i][1]);return `<div class="cp ${d==ix.length?'won':''}"><div class="row"><b>${e} ${nm}</b><span>${d}/${ix.length}</span></div><div class="bar"><i style="width:${d/ix.length*100}%"></i></div><small>${d==ix.length?'Unlocked! 🎉':'Still to go: '+l.join(', ')}</small></div>`}).join('')}</div>
+<div class="card"><h2>🍰 Sunday cheat day</h2><div class="bar"><i style="width:${d3/3*100}%"></i></div><p class="sub" style="margin:8px 0 0">Dabbang Duo this week: ${d3}/3 ${un?'· Unlocked! 🎉':'· '+(3-d3)+' more to earn Sunday off'}</p>${un&&sel.getDay()==0?`<button class="big" onclick="cheat()">${S.c[k]?'Cheat day is on. Tap to undo':'Use my cheat day 🍰'}</button>`:un?'<p class="sub" style="margin:6px 0 0">Your cheat is waiting on Sunday.</p>':''}</div>`}
+function line(ds){const W=300,Hh=110,x=i=>10+i*(W-20)/Math.max(ds.length-1,1),y=p=>Hh-12-p/100*(Hh-24);let pts=[],dots='';
+ ds.forEach((d,i)=>{const k=key(d);if(st(k)=='none')return;const p=cnt(k)*20;pts.push(x(i)+','+y(p));dots+=`<circle cx="${x(i)}" cy="${y(p)}" r="4" fill="${COL[st(k)]}" stroke="#8a7380" stroke-width=".8"/>`});
+ return `<svg viewBox="0 0 ${W} ${Hh}" style="width:100%"><line x1="10" x2="290" y1="${y(100)}" y2="${y(100)}" stroke="#eadfd8" stroke-dasharray="3"/><line x1="10" x2="290" y1="${y(0)}" y2="${y(0)}" stroke="#eadfd8"/><polyline points="${pts.join(' ')}" fill="none" stroke="#c9a3b8" stroke-width="2"/>${dots}</svg>`}
+function vP(){const ds=rng(),s=parse(S.s),t=today(),tr=ds.filter(d=>d>=s&&d<=t&&!ch(key(d)));
+ const cn=H.map((_,i)=>tr.filter(d=>got(key(d))[i]).length),tot=tr.length*5,dn=cn.reduce((a,b)=>a+b,0),p=tot?Math.round(dn/tot*100):0;
+ let a=0,gr=[];cn.forEach((c,i)=>{const w=tot?c/tot*100:0;gr.push(`${DEEP[i]} ${a}% ${a+w}%`);a+=w});gr.push(`#ece3dd ${a}% 100%`);
+ const lab=R=='d'?fmt(sel,1):R=='w'?`${ds[0].getDate()} ${MN(ds[0])} – ${ds[6].getDate()} ${MN(ds[6])}`:sel.toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+ let g2='';
+ if(R=='d'){const e=aw(key(sel)).map((v,i)=>v?AW[i][0]+' '+AW[i][1]:'').filter(Boolean);g2=`<div class="card"><h2>Awards earned</h2><p class="msg" style="margin:0">${e.length?e.join('<br>'):'None yet for this day'}</p></div>`}
+ else if(R=='w')g2=`<div class="card"><h2>Daily score</h2><div class="bars">${ds.map(d=>{const k=key(d),x=st(k),n=cnt(k);return `<div><small>${x=='none'?'':n*20+'%'}</small><i style="height:${x=='none'?4:Math.max(n*20,4)}px;background:${COL[x]}"></i>${d.toLocaleDateString('en-IN',{weekday:'narrow'})}</div>`}).join('')}</div></div>`;
+ else g2=`<div class="card"><h2>Progress line</h2>${line(ds)}<div class="cal">${[...'MTWTFSS'].map(c=>`<small>${c}</small>`).join('')}${Array((ds[0].getDay()+6)%7).fill('<span></span>').join('')}${ds.map(d=>`<button style="background:${COL[st(key(d))]}" onclick="sel=parse('${key(d)}');tab=0;render()">${d.getDate()}</button>`).join('')}</div><div class="lg">${[['ok','Perfect'],['mid','3 or 4 done'],['red','Red day'],['cheat','Cheat day']].map(([c,l])=>`<span><i style="background:${COL[c]}"></i>${l}</span>`).join('')}</div></div>`;
+ return `<div class="seg">${[['d','Day'],['w','Week'],['m','Month']].map(([r,l])=>`<button class="${R==r?'a':''}" onclick="R='${r}';render()">${l}</button>`).join('')}</div>
+<div class="nav"><button onclick="go(-1)">‹</button><b>${lab}</b><button onclick="go(1)">›</button></div>
+<div class="card"><h2>What you did</h2>${tot?`<div class="pie" style="background:conic-gradient(${gr})"><span>${p}%</span></div>`:'<p class="msg">No tracked days here yet.</p>'}<div class="lg">${H.map((h,i)=>`<span><i style="background:${DEEP[i]}"></i>${h[0]} ${cn[i]}/${tr.length}</span>`).join('')}<span><i style="background:#ece3dd"></i>Missed ${tot-dn}</span></div></div>${g2}`}
+function vA(){const s=parse(S.s),t=today(),T=Array(8).fill(0),W=Array(8).fill(0),w=wk(t).map(key),b=stk()[1];
+ for(let d=s;d<=t;d=add(d,1)){const k=key(d);aw(k).forEach((v,i)=>{if(v){T[i]++;if(w.includes(k))W[i]++}})}
+ const tile=i=>`<div class="at ${T[i]?'':'lk'}" style="--c:${i<5?`var(--c${i})`:['#f9d9e6','#c9e8d9','#fcebb8'][i-5]}"><span>${AW[i][0]}</span><b>${AW[i][1]}</b><small>${T[i]} all time · ${W[i]} this week</small></div>`;
+ return `<div class="card"><h2>Single badges</h2><div class="aw">${[0,1,2,3,4].map(tile).join('')}</div></div>
+<div class="card"><h2>Combination awards</h2><div class="aw">${[5,6,7].map(tile).join('')}</div></div>
+<div class="card"><h2>Streak badges</h2><div class="aw">${[[3,'Hat-trick','🥉'],[7,'Week Warrior','🥈'],[14,'Fortnight Flame','🥇'],[30,'Monthly Legend','👑']].map(([n,nm,e])=>`<div class="at ${b>=n?'':'lk'}"><span>${e}</span><b>${nm}</b><small>${n} perfect days in a row</small></div>`).join('')}</div><p class="sub" style="text-align:center;margin:12px 0 0">Best streak: ${b} days</p></div>`}
+function cmv(n){const d=new Date(cm.getFullYear(),cm.getMonth()+n,1);if(d>today())return;cm=d;render()}
+function vC(){const ds=[],t=today();for(let d=new Date(cm);d.getMonth()==cm.getMonth();d=add(d,1))ds.push(d);
+ return `<div class="nav"><button onclick="cmv(-1)">‹</button><b>${cm.toLocaleDateString('en-IN',{month:'long',year:'numeric'})}</b><button onclick="cmv(1)">›</button></div><div class="card"><div class="cal">${[...'MTWTFSS'].map(c=>`<small>${c}</small>`).join('')}${Array((ds[0].getDay()+6)%7).fill('<span></span>').join('')}${ds.map(d=>{const k=key(d),x=st(k);return `<button class="cl" ${d>t?'disabled':''} style="background:${COL[x]};${key(sel)==k?'outline:2px solid #c9a3b8':''}" onclick="sel=parse('${k}');cm=new Date(sel.getFullYear(),sel.getMonth(),1);tab=0;render()">${d.getDate()}<small>${x=='none'?'':cnt(k)*20+'%'}</small></button>`}).join('')}</div><p class="sub" style="margin:0;text-align:center">Tap any day to open it and edit it.</p></div>`}
+function vH(){const T=[
+['Tick it','Tap a card the moment you finish that good thing. Tapped too soon? Tap again. Nobody is judging, except the colour red.'],
+['Read the ring','The circle on top is your whole day at a glance. It fills as you tick. Close it completely and you have officially rung the bell.'],
+['Hop between days','The ‹ › arrows around the date take you one day back or forward. You can fix the past, but tomorrow stays locked. Time travel is not included in the free plan.'],
+['Badges','Every good thing earns its own badge, and they all live in the Awards tab. Locked ones look sleepy until you wake them up. Chugging Champion is the one with the most juice.'],
+['The combos','Holy Trinity for Skin is Bath, Skin care and Pineapple juice. Dabbang Duo is Workout and Healthy diet. Prime Panchang is all five. The bars on the Today page show how close you are, so you will never be left guessing.'],
+['Sunday cheat day','Score the Dabbang Duo three times between Monday and Saturday and Sunday is all yours. Open that Sunday and tap the cheat button. Dessert without guilt, the best kind of dessert. A cheat day never counts against your score.'],
+['Colours and punishments','All five done turns the day green. Three or four makes it yellow. Two or fewer turns it red and drags your overall score down. Call it tough love. I am only a little bit sorry.'],
+['Overall score and streak','Overall score is everything you did divided by everything you could have done since your first day. The little arrow shows how it moved since yesterday. The streak counts perfect days in a row, so keep the chain going, every link counts.'],
+['Calendar','Every day with its percentage. Tap any day to open it and edit it. Forgot to tick last Tuesday? I will not tell anyone.'],
+['Progress','Pick Day, Week or Month. The pie shows what you did, and the grey slice is what you missed. Aim to be the bigger slice. The graphs show whether you are climbing or sliding.'],
+['All your devices','Type the same secret code on every phone or laptop and everything syncs. The small note under the title tells you if you are synced. If it says offline, your ticks are safe on this device and will go up later. I can open the site with the same code and see how you are doing. Yes, I am watching, but only because I am proud of you.']];
+ return `<div class="card"><h2>How this thing works 🌸</h2>${T.map(([a,b])=>`<div class="hp"><b>${a}</b><p>${b}</p></div>`).join('')}</div>
+<div class="card"><h2>Danger zone</h2><div class="dz"><p class="hp">Reset wipes every tick, award and streak on every device. To unlock the button, type RESET below.</p><input id="rs" placeholder="Type RESET" autocomplete="off" oninput="$('rb').disabled=this.value!='RESET'"><button class="big" id="rb" disabled onclick="doReset()" style="background:#f2a7a7">Reset everything</button></div>${DB?'<button class="big" onclick="chCode()">Change secret code</button>':''}</div>`}
+function render(){if(DB&&!CODE){A.innerHTML='<div class="card cd"><h1>Hi Anshu 🌸</h1><p>Type the secret code I gave you. Use the same code on every device and your ticks follow you everywhere.</p><input id="cc" placeholder="Secret code" autocomplete="off"><button class="big" onclick="setCode()">Open my Glow-Up</button></div>';return}const t=today(),o=ov(t),y=add(t,-1),tr=parse(S.s)<=y?o-ov(y):0,sk=stk()[0];
+ A.innerHTML=`<div class="top"><div><h1>Ananya’s Glow-Up 🌸</h1><p class="sub">Five good things a day. Every tick counts. <span id="sy"></span></p></div><button class="qm" aria-label="Help" onclick="tab=4;render()">?</button></div>
+<div class="stats"><div class="chip"><b>${o}%</b><small>Overall score</small></div><div class="chip"><b style="color:${tr<0?'#b45a5a':'#4f9a78'}">${tr<0?'▼':tr>0?'▲':'•'} ${Math.abs(tr)}%</b><small>vs yesterday</small></div><div class="chip"><b>🔥 ${sk}</b><small>Perfect streak</small></div></div>
+<div class="tabs">${[[0,'Today'],[3,'Calendar'],[1,'Progress'],[2,'Awards']].map(([i,n])=>`<button class="${i==tab?'a':''}" onclick="tab=${i};render()">${n}</button>`).join('')}</div>${[vT,vP,vA,vC,vH][tab]()}`;dot()}
+render();pull();setInterval(pull,30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull()});
+</script></body></html>
