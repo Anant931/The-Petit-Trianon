@@ -67,7 +67,7 @@ h2{font:600 17px Fraunces,Georgia,serif;margin:0 0 10px}
 <script>
 const H=[['Necessary Good','Bath','🛁'],['Smooth Operator','Skin care','🧴'],['Chugging Champion','Pineapple juice','🍍'],['Heavy Driver','Workout','🏋️'],['Dietary Devi','Healthy diet','🥗']];
 const CB=[['Holy Trinity for Skin','✨',[0,1,2]],['Dabbang Duo','💪',[3,4]],['Prime Panchang','👑',[0,1,2,3,4]]];
-const AW=[...H.map(h=>[h[2],h[0]]),...CB.map(c=>[c[1],c[0]])];
+const AW=[...H.map(h=>[h[2],h[0]]),...CB.map(c=>[c[1],c[0]]),['👸','Comeback Queen']];
 const DEEP=['#f0a6b8','#bfaee6','#f3d06b','#8ccfae','#9cc4e6'];
 const COL={ok:'#bfe5cf',mid:'#fbe6b8',red:'#f2a7a7',cheat:'#e3dbf5',now:'#f0e2da',none:'#f3ece6'};
 const K='ananya-glow-v1',A=document.getElementById('app'),$=id=>document.getElementById(id);
@@ -98,11 +98,12 @@ const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 const today=()=>{const t=new Date();t.setHours(0,0,0,0);return t};
 if(!S.s){S.s=key(today());save()}
 let tab=0,R='w',sel=today(),cm=new Date(sel.getFullYear(),sel.getMonth(),1);
-const raw=k=>S.d[k]||[0,0,0,0,0],pas=k=>S.p[k]||[0,0,0,0,0],QT=[2,2,3,3,3];
+const raw=k=>S.d[k]||[0,0,0,0,0],pas=k=>S.p[k]||[0,0,0,0,0],QT=[2,2,2,2,2];
 const got=k=>raw(k).map((v,i)=>v||pas(k)[i]?1:0);
 const used=(d,i)=>wk(d).filter(x=>pas(key(x))[i]).length;
 const cnt=k=>got(k).filter(Boolean).length;
-const aw=k=>{const g=got(k);return[...g.map(Boolean),...CB.map(c=>c[2].every(i=>g[i]))]};
+const cq=k=>cnt(k)==5&&st(key(add(parse(k),-1)))=='red';
+const aw=k=>{const g=got(k);return[...g.map(Boolean),...CB.map(c=>c[2].every(i=>g[i])),cq(k)]};
 const mon=d=>add(d,-((d.getDay()+6)%7));
 const wk=d=>[...Array(7)].map((_,i)=>add(mon(d),i));
 const duo=d=>wk(d).slice(0,6).filter(x=>{const g=got(key(x));return g[3]&&g[4]}).length;
@@ -114,14 +115,16 @@ const fmt=(d,l)=>d.toLocaleDateString('en-IN',{weekday:l?'long':'short',day:'num
 const MN=d=>d.toLocaleDateString('en-IN',{month:'short'});
 let tt;function toast(m){if(!m)return;const e=$('t');e.textContent=m;e.className='s';clearTimeout(tt);tt=setTimeout(()=>e.className='',2600)}
 function conf(big){for(let i=0;i<(big?34:10);i++){const s=document.createElement('span');s.className='cf';s.textContent=['🌸','✨','🍍','💖','⭐'][i%5];s.style.cssText=`left:${Math.random()*100}vw;animation-delay:${Math.random()*.5}s;font-size:${14+Math.random()*14}px`;document.body.appendChild(s);setTimeout(()=>s.remove(),2700)}}
-function tg(i){const k=key(sel),g=[...raw(k)],pp=[...pas(k)],b=aw(k),d0=duo(sel);if(pp[i]){pp[i]=0;g[i]=1;S.p[k]=pp;push('p/'+k,pp)}else g[i]=g[i]?0:1;S.d[k]=g;if(k<S.s){S.s=k;push('s',k)}push('d/'+k,g);save();const a=aw(k);let m='',big=0;
+function tg(i){const k=key(sel),g=[...raw(k)],pp=[...pas(k)],b=aw(k),d0=duo(sel),s0=stk()[0];if(pp[i]){pp[i]=0;g[i]=1;S.p[k]=pp;push('p/'+k,pp)}else g[i]=g[i]?0:1;S.d[k]=g;if(k<S.s){S.s=k;push('s',k)}push('d/'+k,g);save();const a=aw(k);let m='',big=0;
  CB.forEach((c,j)=>{if(a[5+j]&&!b[5+j]){m=`🏆 ${c[0]} unlocked!`;big=1}else if(!a[5+j]&&b[5+j])m=`${c[0]} slipped away…`});
+ if(a[8]&&!b[8]){m='👸 Comeback Queen! You bounced right back, Anshu.';big=1}
  if(!m&&g[i])m=cnt(k)==4?DLG[80]:`🏅 ${H[i][0]} badge earned!`;
  if(duo(sel)>=3&&d0<3){m='🍰 Sunday cheat day unlocked!';big=1}
+ if(stk()[0]==14&&s0<14){m='🍽️ Fortnight Flame! Dinner date unlocked!';big=1}
  if(g[i])conf(big);toast(m);render()}
 function ppp(i,ev){ev.stopPropagation();const k=key(sel),pp=[...pas(k)],b=aw(k);
  if(pp[i])pp[i]=0;else{if(raw(k)[i]){toast('Already ticked, no pass needed');return}if(used(sel,i)>=QT[i]){toast('No Puff Puff Passes left this week for '+H[i][0]);return}pp[i]=1;toast('🎟 Puff Puff Pass used. '+H[i][0]+' counts, no stress!')}
- S.p[k]=pp;if(k<S.s){S.s=k;push('s',k)}push('p/'+k,pp);save();const a=aw(k);CB.forEach((c,j)=>{if(a[5+j]&&!b[5+j]){toast('🏆 '+c[0]+' unlocked!');conf(1)}});render()}
+ S.p[k]=pp;if(k<S.s){S.s=k;push('s',k)}push('p/'+k,pp);save();const a=aw(k);CB.forEach((c,j)=>{if(a[5+j]&&!b[5+j]){toast('🏆 '+c[0]+' unlocked!');conf(1)}});if(a[8]&&!b[8]){toast('👸 Comeback Queen! You bounced right back, Anshu.');conf(1)}render()}
 function cheat(){const k=key(sel);if(duo(sel)<3)return;S.c[k]=S.c[k]?0:1;if(S.c[k]){conf(1);toast('Enjoy your cheat day 🍰')}push('c/'+k,S.c[k]);save();render()}
 function go(n){let d;if(tab==1&&R=='w')d=add(sel,7*n);else if(tab==1&&R=='m')d=new Date(sel.getFullYear(),sel.getMonth()+n,1);else d=add(sel,n);
  if(d>today())d=today();const last=tab==1&&R=='w'?add(mon(d),6):tab==1&&R=='m'?new Date(d.getFullYear(),d.getMonth()+1,0):d;
@@ -135,27 +138,33 @@ function vT(){const k=key(sel),g=got(k),n=cnt(k),p=n*20,isT=k==key(today()),C=2*
 <p class="msg">${ch(k)?'Cheat day! No penalty today 🍰':red?'A red day, Billo Rani. It happens. I’ll be waiting for the comeback 💔':m}</p></div>
 ${H.map((h,i)=>{const P=pas(k)[i],L=QT[i]-used(sel,i);return `<div class="hb ${g[i]?'on':''}" role="button" tabindex="0" style="--c:var(--c${i});--d:${DEEP[i]}" onclick="tg(${i})"><span class="em">${h[2]}</span><span><b>${h[0]}</b><small>${h[1]}${P?' · 🎟 pass used':g[i]?' · 🏅 badge earned':''}</small></span><button class="pp" aria-label="Puff Puff Pass" onclick="ppp(${i},event)">🎟 ${P?'Undo':L+' left'}</button><span class="ck">${g[i]?(P?'🎟':'✓'):''}</span></div>`}).join('')}
 <div class="card"><h2>How close are you today?</h2>${CB.map(([nm,e,ix])=>{const d=ix.filter(i=>g[i]).length,l=ix.filter(i=>!g[i]).map(i=>H[i][1]);return `<div class="cp ${d==ix.length?'won':''}"><div class="row"><b>${e} ${nm}</b><span>${d}/${ix.length}</span></div><div class="bar"><i style="width:${d/ix.length*100}%"></i></div><small>${d==ix.length?'Unlocked! 🎉':'Still to go: '+l.join(', ')}</small></div>`}).join('')}</div>
-<div class="card"><h2>🍰 Sunday cheat day</h2><div class="bar"><i style="width:${d3/3*100}%"></i></div><p class="sub" style="margin:8px 0 0">Dabbang Duo this week: ${d3}/3 ${un?'· Unlocked! 🎉':'· '+(3-d3)+' more to earn Sunday off'}</p>${un&&sel.getDay()==0?`<button class="big" onclick="cheat()">${S.c[k]?'Cheat day is on. Tap to undo':'Use my cheat day 🍰'}</button>`:un?'<p class="sub" style="margin:6px 0 0">Your cheat is waiting on Sunday.</p>':''}</div>`}
+<div class="card"><h2>🍰 Sunday cheat day</h2><div class="bar"><i style="width:${d3/3*100}%"></i></div><p class="sub" style="margin:8px 0 0">Dabbang Duo this week: ${d3}/3 ${un?'· Unlocked! 🎉':'· '+(3-d3)+' more to earn Sunday off'}</p>${un&&sel.getDay()==0?`<button class="big" onclick="cheat()">${S.c[k]?'Cheat day is on. Tap to undo':'Use my cheat day 🍰'}</button>`:un?'<p class="sub" style="margin:6px 0 0">Your cheat is waiting on Sunday.</p>':''}</div>
+<div class="card"><h2>🍽️ Dinner date progress</h2><div class="bar"><i style="width:${Math.min(stk()[0],14)/14*100}%"></i></div><p class="sub" style="margin:8px 0 0">${Math.min(stk()[0],14)}/14 perfect days in a row${stk()[1]>=14?' · Earned once already 🎉':''}</p></div>`}
 function line(ds){const W=300,Hh=110,x=i=>10+i*(W-20)/Math.max(ds.length-1,1),y=p=>Hh-12-p/100*(Hh-24);let pts=[],dots='';
  ds.forEach((d,i)=>{const k=key(d);if(st(k)=='none')return;const p=cnt(k)*20;pts.push(x(i)+','+y(p));dots+=`<circle cx="${x(i)}" cy="${y(p)}" r="4" fill="${COL[st(k)]}" stroke="#8a7380" stroke-width=".8"/>`});
  return `<svg viewBox="0 0 ${W} ${Hh}" style="width:100%"><line x1="10" x2="290" y1="${y(100)}" y2="${y(100)}" stroke="#eadfd8" stroke-dasharray="3"/><line x1="10" x2="290" y1="${y(0)}" y2="${y(0)}" stroke="#eadfd8"/><polyline points="${pts.join(' ')}" fill="none" stroke="#c9a3b8" stroke-width="2"/>${dots}</svg>`}
+function wstat(d){const t=today(),s=parse(S.s),ds=wk(d).filter(x=>x>=s&&x<=t&&!ch(key(x))),c=H.map((_,i)=>ds.filter(x=>got(key(x))[i]).length),n=ds.length;return{n,c,p:n?Math.round(c.reduce((a,b)=>a+b,0)/(n*5)*100):0}}
+function cmpW(){const a=wstat(sel),b=wstat(add(mon(sel),-7));
+ if(!b.n)return '<div class="card"><h2>This week vs last week</h2><p class="msg" style="margin:0">No data for last week yet. Next week there will be a number to beat.</p></div>';
+ const df=a.p-b.p,ar=x=>x>0?'▲':x<0?'▼':'•',cl=x=>x<0?'#b45a5a':'#4f9a78',pc=(w,i)=>w.n?Math.round(w.c[i]/w.n*100):0;
+ return `<div class="card"><h2>This week vs last week</h2><div class="stats"><div class="chip"><b>${a.p}%</b><small>This week</small></div><div class="chip"><b>${b.p}%</b><small>Last week</small></div><div class="chip"><b style="color:${cl(df)}">${ar(df)} ${Math.abs(df)}%</b><small>Change</small></div></div>${H.map((h,i)=>{const d=pc(a,i)-pc(b,i);return `<p class="sub" style="margin:4px 0">${h[2]} ${h[0]}: ${pc(a,i)}% vs ${pc(b,i)}% <span style="color:${cl(d)}">${ar(d)}</span></p>`}).join('')}<p class="msg">${df>0?'Better than last week. Keep climbing, Anshu!':df<0?'A little dip from last week. You can win it back.':'Same as last week. Let’s push it higher.'}</p></div>`}
 function vP(){const ds=rng(),s=parse(S.s),t=today(),tr=ds.filter(d=>d>=s&&d<=t&&!ch(key(d)));
  const cn=H.map((_,i)=>tr.filter(d=>got(key(d))[i]).length),tot=tr.length*5,dn=cn.reduce((a,b)=>a+b,0),p=tot?Math.round(dn/tot*100):0;
  let a=0,gr=[];cn.forEach((c,i)=>{const w=tot?c/tot*100:0;gr.push(`${DEEP[i]} ${a}% ${a+w}%`);a+=w});gr.push(`#ece3dd ${a}% 100%`);
  const lab=R=='d'?fmt(sel,1):R=='w'?`${ds[0].getDate()} ${MN(ds[0])} – ${ds[6].getDate()} ${MN(ds[6])}`:sel.toLocaleDateString('en-IN',{month:'long',year:'numeric'});
  let g2='';
  if(R=='d'){const e=aw(key(sel)).map((v,i)=>v?AW[i][0]+' '+AW[i][1]:'').filter(Boolean);g2=`<div class="card"><h2>Awards earned</h2><p class="msg" style="margin:0">${e.length?e.join('<br>'):'None yet for this day'}</p></div>`}
- else if(R=='w')g2=`<div class="card"><h2>Daily score</h2><div class="bars">${ds.map(d=>{const k=key(d),x=st(k),n=cnt(k);return `<div><small>${x=='none'?'':n*20+'%'}</small><i style="height:${x=='none'?4:Math.max(n*20,4)}px;background:${COL[x]}"></i>${d.toLocaleDateString('en-IN',{weekday:'narrow'})}</div>`}).join('')}</div></div>`;
+ else if(R=='w')g2=cmpW()+`<div class="card"><h2>Daily score</h2><div class="bars">${ds.map(d=>{const k=key(d),x=st(k),n=cnt(k);return `<div><small>${x=='none'?'':n*20+'%'}</small><i style="height:${x=='none'?4:Math.max(n*20,4)}px;background:${COL[x]}"></i>${d.toLocaleDateString('en-IN',{weekday:'narrow'})}</div>`}).join('')}</div></div>`;
  else g2=`<div class="card"><h2>Progress line</h2>${line(ds)}<div class="cal">${[...'MTWTFSS'].map(c=>`<small>${c}</small>`).join('')}${Array((ds[0].getDay()+6)%7).fill('<span></span>').join('')}${ds.map(d=>`<button style="background:${COL[st(key(d))]}" onclick="sel=parse('${key(d)}');tab=0;render()">${d.getDate()}</button>`).join('')}</div><div class="lg">${[['ok','Perfect'],['mid','3 or 4 done'],['red','Red day'],['cheat','Cheat day']].map(([c,l])=>`<span><i style="background:${COL[c]}"></i>${l}</span>`).join('')}</div></div>`;
  return `<div class="seg">${[['d','Day'],['w','Week'],['m','Month']].map(([r,l])=>`<button class="${R==r?'a':''}" onclick="R='${r}';render()">${l}</button>`).join('')}</div>
 <div class="nav"><button onclick="go(-1)">‹</button><b>${lab}</b><button onclick="go(1)">›</button></div>
 <div class="card"><h2>What you did</h2>${tot?`<div class="pie" style="background:conic-gradient(${gr})"><span>${p}%</span></div>`:'<p class="msg">No tracked days here yet.</p>'}<div class="lg">${H.map((h,i)=>`<span><i style="background:${DEEP[i]}"></i>${h[0]} ${cn[i]}/${tr.length}</span>`).join('')}<span><i style="background:#ece3dd"></i>Missed ${tot-dn}</span></div></div>${g2}`}
-function vA(){const s=parse(S.s),t=today(),T=Array(8).fill(0),W=Array(8).fill(0),w=wk(t).map(key),b=stk()[1];
+function vA(){const s=parse(S.s),t=today(),T=Array(9).fill(0),W=Array(9).fill(0),w=wk(t).map(key),b=stk()[1];
  for(let d=s;d<=t;d=add(d,1)){const k=key(d);aw(k).forEach((v,i)=>{if(v){T[i]++;if(w.includes(k))W[i]++}})}
- const tile=i=>`<div class="at ${T[i]?'':'lk'}" style="--c:${i<5?`var(--c${i})`:['#f9d9e6','#c9e8d9','#fcebb8'][i-5]}"><span>${AW[i][0]}</span><b>${AW[i][1]}</b><small>${T[i]} all time · ${W[i]} this week</small></div>`;
- return `<div class="card"><h2>Single badges</h2><div class="aw">${[0,1,2,3,4].map(tile).join('')}</div></div>
-<div class="card"><h2>Combination awards</h2><div class="aw">${[5,6,7].map(tile).join('')}</div></div>
-<div class="card"><h2>Streak badges</h2><div class="aw">${[[3,'Hat-trick','🥉'],[7,'Week Warrior','🥈'],[14,'Fortnight Flame','🥇'],[30,'Monthly Legend','👑']].map(([n,nm,e])=>`<div class="at ${b>=n?'':'lk'}"><span>${e}</span><b>${nm}</b><small>${n} perfect days in a row</small></div>`).join('')}</div><p class="sub" style="text-align:center;margin:12px 0 0">Best streak: ${b} days</p></div>`}
+ const tile=i=>`<div class="at ${T[i]?'':'lk'}" style="--c:${i<5?`var(--c${i})`:['#f9d9e6','#c9e8d9','#fcebb8','#e3dbf5'][i-5]}"><span>${AW[i][0]}</span><b>${AW[i][1]}</b><small>${T[i]} all time · ${W[i]} this week</small></div>`;
+ return `${b>=14?'<div class="card" style="background:#fcebb8;text-align:center"><h2>🍽️ Dinner date unlocked!</h2><p class="msg" style="margin:0">You earned the Fortnight Flame, so dinner is on me. Tell me where, Anshu.</p></div>':''}<div class="card"><h2>Single badges</h2><div class="aw">${[0,1,2,3,4].map(tile).join('')}</div></div>
+<div class="card"><h2>Combination and special awards</h2><div class="aw">${[5,6,7,8].map(tile).join('')}</div></div>
+<div class="card"><h2>Streak badges</h2><div class="aw">${[[3,'Hat-trick','🥉'],[7,'Week Warrior','🥈'],[14,'Fortnight Flame','🥇'],[30,'Monthly Legend','👑']].map(([n,nm,e])=>`<div class="at ${b>=n?'':'lk'}"><span>${e}</span><b>${nm}</b><small>${n} perfect days in a row</small>${n==14?'<small style="display:block;margin-top:4px">🍽️ Reward: a dinner date with me</small>':''}</div>`).join('')}</div><p class="sub" style="text-align:center;margin:12px 0 0">Best streak: ${b} days</p></div>`}
 function cmv(n){const d=new Date(cm.getFullYear(),cm.getMonth()+n,1);if(d>today())return;cm=d;render()}
 function vC(){const ds=[],t=today();for(let d=new Date(cm);d.getMonth()==cm.getMonth();d=add(d,1))ds.push(d);
  return `<div class="nav"><button onclick="cmv(-1)">‹</button><b>${cm.toLocaleDateString('en-IN',{month:'long',year:'numeric'})}</b><button onclick="cmv(1)">›</button></div><div class="card"><div class="cal">${[...'MTWTFSS'].map(c=>`<small>${c}</small>`).join('')}${Array((ds[0].getDay()+6)%7).fill('<span></span>').join('')}${ds.map(d=>{const k=key(d),x=st(k);return `<button class="cl" ${d>t?'disabled':''} style="background:${COL[x]};${key(sel)==k?'outline:2px solid #c9a3b8':''}" onclick="sel=parse('${k}');cm=new Date(sel.getFullYear(),sel.getMonth(),1);tab=0;render()">${d.getDate()}<small>${x=='none'?'':cnt(k)*20+'%'}</small></button>`}).join('')}</div><p class="sub" style="margin:0;text-align:center">Tap any day to open it and edit it.</p></div>`}
@@ -165,12 +174,13 @@ function vH(){const T=[
 ['Hop between days','The ‹ › arrows around the date take you one day back or forward. You can fix the past, but tomorrow stays locked. Time travel is not included in the free plan.'],
 ['Badges','Every good thing earns its own badge, and they all live in the Awards tab. Locked ones look sleepy until you wake them up. Chugging Champion is the one with the most juice.'],
 ['The combos','Holy Trinity for Skin is Bath, Skin care and Pineapple juice. Dabbang Duo is Workout and Healthy diet. Prime Panchang is all five. The bars on the Today page show how close you are, so you will never be left guessing.'],
-['Puff Puff Pass','Some days the list is just too much, and that is okay. Every week you get 2 passes each for Bath and Skin care, and 3 each for Pineapple juice, Workout and Healthy diet. Tap the little 🎟 button on a card and that good thing counts as done for the day, including your score, badges and streak. Tap Undo to take it back. Ticking the card yourself later also returns the pass. Passes refill every Monday. They are for rough days and not for every day, so spend them wisely. Pass the pun, not the pineapple.'],
+['Puff Puff Pass','Some days the list is just too much, and that is okay. Every week you get 2 passes for each good thing. Tap the little 🎟 button on a card and that good thing counts as done for the day, including your score, badges and streak. Tap Undo to take it back. Ticking the card yourself later also returns the pass. Passes refill every Monday. They are for rough days and not for every day, so spend them wisely. Pass the pun, not the pineapple.'],
 ['Sunday cheat day','Score the Dabbang Duo three times between Monday and Saturday and Sunday is all yours. Open that Sunday and tap the cheat button. Dessert without guilt, the best kind of dessert. A cheat day never counts against your score.'],
 ['Colours and punishments','All five done turns the day green. Three or four makes it yellow. Two or fewer turns it red and drags your overall score down. Call it tough love. I am only a little bit sorry.'],
-['Overall score and streak','Overall score is everything you did divided by everything you could have done since your first day. The little arrow shows how it moved since yesterday. The streak counts perfect days in a row, so keep the chain going, every link counts.'],
+['Comeback Queen','Had a red day? It happens. Get all five done the very next day and you earn the Comeback Queen badge. A bad day is only a plot twist.'],
+['Overall score and streak','Overall score is everything you did divided by everything you could have done since your first day. The little arrow shows how it moved since yesterday. The streak counts perfect days in a row, so keep the chain going, every link counts. Reach 14 perfect days in a row for the Fortnight Flame and I owe you a dinner date. A real one, with real food.'],
 ['Calendar','Every day with its percentage. Tap any day to open it and edit it. Forgot to tick last Tuesday? I will not tell anyone.'],
-['Progress','Pick Day, Week or Month. The pie shows what you did, and the grey slice is what you missed. Aim to be the bigger slice. The graphs show whether you are climbing or sliding.'],
+['Progress','Pick Day, Week or Month. The pie shows what you did, and the grey slice is what you missed. Aim to be the bigger slice. The graphs show whether you are climbing or sliding. The Week view also sets this week against last week, so you always have a number to beat.'],
 ['All your devices','Type the same secret code on every phone or laptop and everything syncs. The small note under the title tells you if you are synced. If it says offline, your ticks are safe on this device and will go up later. I can open the site with the same code and see how you are doing. Yes, I am watching, but only because I am proud of you.']];
  return `<div class="card"><h2>How this thing works 🌸</h2>${T.map(([a,b])=>`<div class="hp"><b>${a}</b><p>${b}</p></div>`).join('')}</div>
 <div class="card"><h2>Danger zone</h2><div class="dz"><p class="hp">Reset wipes every tick, award and streak on every device. To unlock the button, type RESET below.</p><input id="rs" placeholder="Type RESET" autocomplete="off" oninput="$('rb').disabled=this.value!='RESET'"><button class="big" id="rb" disabled onclick="doReset()" style="background:#f2a7a7">Reset everything</button></div>${DB?'<button class="big" onclick="chCode()">Change secret code</button>':''}</div>`}
